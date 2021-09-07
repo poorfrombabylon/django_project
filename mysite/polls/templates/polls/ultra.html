@@ -1,0 +1,54 @@
+{% extends  'base.html' %}
+
+{% block main %}
+<div class="container-fluid">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Username</th>
+            <th scope="col">Questionnaire</th>
+            <th scope="col">Question</th>
+            <th scope="col">Answer</th>
+        </tr>
+        </thead>
+        {% for k, v in results.items %}
+        <tbody>
+        <tr>
+            <th scope="row">{{v.counter}}</th>
+            <td>{{v.realmyname}}</td>
+            <td>{{v.qn_text}}</td>
+            <td>{{v.q_text}}</td>
+            <td>{{v.mykekochoice}}</td>
+
+        </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</div>
+
+<div class="container-fluid">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Questionnaire</th>
+            <th scope="col">Question</th>
+            <th scope="col">Answer</th>
+            <th scope="col">How many times?</th>
+        </tr>
+        </thead>
+        {% for k, v in ch.items %}
+        <tbody>
+        <tr>
+            <th scope="row">{{v.cc}}</th>
+            <td>{{v.questionlist}}</td>
+            <td>{{v.question}}</td>
+            <td>{{v.choice}}</td>
+            <td>{{v.votes}}</td>
+        </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

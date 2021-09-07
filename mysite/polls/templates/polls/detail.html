@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<div class="container-fluid">
+    <ul class="list-group list-group-flush">
+        <form action="{% url 'polls:vote' questionlist.id %}" method="post">
+            {% csrf_token %}
+            <legend><h1>{{ questionlist.question_list_text }}</h1></legend>
+            {% for question in questionlist.question_set.all %}
+            <li class="list-group-item bg-info text-white">
+                {{ question.question_text }}
+            </li>
+            {% for choice in question.choice_set.all %}
+            <!--{{ questionlist.id|turbokek:user.id|kek:question.id }}-->
+            {% if questionlist.id|turbokek:user.id|kek:question.id == choice.id %}
+            <li class="list-group-item" for="choice{{question.id}}{{ forloop.counter }}">
+                <input checked type="radio" name="choice[{{question.id}}]"
+                       id="choice{{question.id}}{{ forloop.counter }}" value="{{ choice.id }}">
+                <label for="choice{{question.id}}{{ forloop.counter }}">{{ choice.choice_text }}</label>
+            </li>
+            {% else %}
+            <li class="list-group-item" for="choice{{question.id}}{{ forloop.counter }}">
+                <input type="radio" name="choice[{{question.id}}]" id="choice{{question.id}}{{ forloop.counter }}"
+                       value="{{ choice.id }}">
+                <label for="choice{{question.id}}{{ forloop.counter }}">{{ choice.choice_text }}</label>
+            </li>
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+            <input type="submit" value="Vote" class="btn btn-info btn-lg btn-block"><br><br>
+        </form>
+    </ul>
+</div>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends  'base.html' %}
+
+{% block main %}
+{% if user.is_authenticated %}
+<body class="text-center">
+<div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+    <main role="main" class="inner cover">
+        <h1 class="cover-heading">This is the Home page of the project.</h1>
+        <p class="lead">Polls is the app used for numerous elections in all Europian countries.</p>
+        <p class="lead">
+            <a href="/polls/" class="btn btn-lg btn-secondary">Questions</a>
+            <a href="/user/logout" class="btn btn-lg btn-secondary">Logout</a>
+        </p>
+    </main>
+</div>
+{% else %}
+<a href="/user/login">login</a>
+{% endif %}
+{% endblock %}

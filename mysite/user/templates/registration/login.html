@@ -1,0 +1,32 @@
+{% extends  'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block main %}
+{% if not user.is_authenticated %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <h1 class="text-center">Authorisation</h1>
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Log in to your account</h4>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ next }}">
+
+                        {{ form|crispy }}
+
+                        <button type="submit" class="btn btn-primary btn-block">Log in</button>
+                        <a href="/user/new" class="btn btn-danger btn-block">New User</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<meta http-equiv="REFRESH" content="0;url=/polls">
+{% endif %}
+{% endblock %}
